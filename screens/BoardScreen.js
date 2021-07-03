@@ -31,7 +31,7 @@ const BoardScreen = ({ navigation, route }) => {
                         rounded 
                         source={{
                             uri:
-                            "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
+                            messages[0]?.data.photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
                         }} 
                     />
                     <Text style={{color:'white', marginLeft: 10, fontWeight: '700'}}>
@@ -49,7 +49,7 @@ const BoardScreen = ({ navigation, route }) => {
             ),
         });
 
-    }, [navigation])
+    }, [navigation, messages])
 
     // SEND MESSAGE //
     const sendMessage=() => {
@@ -91,10 +91,12 @@ const BoardScreen = ({ navigation, route }) => {
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <>
-                <ScrollView>
+                <ScrollView contentContainerStyle={{
+                    paddingTop: 15
+                }}>
                     {messages.map(({id, data})=> 
                     data.email === auth.currentUser.email ?(
-                            <View key={id} style={styles.reciever}>
+                            <View key={id} style={styles.receiver}>
                                 <Avatar 
                                 position='absolute'
                                 rounded
@@ -115,12 +117,17 @@ const BoardScreen = ({ navigation, route }) => {
                                 </Text>
                             </View>
                         ): (
-                            <View stye={styles.sender}>
+                            <View style= {styles.senders}>
                                 <Avatar 
-                               rounded
-                               position='absolute'
+                                position='absolute'
+                                containerStyle={{
+                                    position: 'absolute',
+                                    bottom: -15,
+                                    left: -5,
+                                }}
                                bottom={-15}
-                               right={-5}
+                               left={-5}
+                               rounded
                                size={30}
                                source={{
                                    uri: data.photoURL,
@@ -185,7 +192,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
     },
 
-    reciever:{
+    receiver:{
         padding: 15,
         backgroundColor: '#ECECEC',
         alignSelf: 'flex-end',
@@ -196,7 +203,7 @@ const styles = StyleSheet.create({
         position:'relative'
     },
 
-    sender: {
+    senders: {
         padding: 15,
         backgroundColor: 'purple',
         alignSelf: 'flex-start',
