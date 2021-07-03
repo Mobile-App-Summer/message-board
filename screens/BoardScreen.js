@@ -71,7 +71,7 @@ const BoardScreen = ({ navigation, route }) => {
         .collection('Boards')
         .doc(route.params.id)
         .collection('messages')
-        .orderBy('timestamp', 'desc')
+        .orderBy('timestamp')
         .onSnapshot(snapshot=> setMessages (
             snapshot.docs.map(doc => ({
                 id: doc.id,
