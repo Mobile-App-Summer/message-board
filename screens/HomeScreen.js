@@ -50,10 +50,7 @@ const HomeScreen = ({navigation}) => {
                 width:80,
                 marginRight: 20,
             }}>
-                <TouchableOpacity 
-                activeOpacity={0.5}>
-                    <AntDesign name="camerao" size={24} color='black'/>
-                </TouchableOpacity>
+
                 <TouchableOpacity activeOpacity={0.5}>
                     <SimpleLineIcons 
                     onPress={()=> navigation.navigate("AddChat")}

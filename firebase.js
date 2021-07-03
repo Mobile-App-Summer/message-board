@@ -3,14 +3,13 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC_CHthj5ozh7vXjuJRCp_jWqmFSBnKy4A",
-    authDomain: "messageboard-feb20.firebaseapp.com",
-    databaseURL: "https://messageboard-feb20-default-rtdb.firebaseio.com",
-    projectId: "messageboard-feb20",
-    storageBucket: "messageboard-feb20.appspot.com",
-    messagingSenderId: "730216529946",
-    appId: "1:730216529946:web:b4b06097049d38aa1051a3",
-    measurementId: "G-08CLXRH7E4"
+  apiKey: "AIzaSyAB9lLrDf_wVoG8kifZUwuJldf0lNQ8OKo",
+  authDomain: "boardmessage-9ea3f.firebaseapp.com",
+  projectId: "boardmessage-9ea3f",
+  storageBucket: "boardmessage-9ea3f.appspot.com",
+  messagingSenderId: "361924825891",
+  appId: "1:361924825891:web:11fe3bdc3e3371a804b296",
+  measurementId: "G-SJNBZEJKF1"
   };
 
   let app;
