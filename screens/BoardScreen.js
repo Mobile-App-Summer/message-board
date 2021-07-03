@@ -14,6 +14,7 @@ const BoardScreen = ({ navigation, route }) => {
 
     // type message and send //
     const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([]);
     useLayoutEffect(() => {
         navigation.setOptions({
             title:"Board",
@@ -59,11 +60,26 @@ const BoardScreen = ({ navigation, route }) => {
             message: input,
             displayName: auth.currentUser.displayName,
             email: auth.currentUser.email,
-            photoURL: auth.currentUser.photoURL
+            photoURL: auth.currentUser.photoURL,
         })
 
         setInput('')
     };
+
+    useLayoutEffect(() => {
+        const unsubscribe=db
+        .collection('Boards')
+        .doc(route.params.id)
+        .collection('messages')
+        .orderBy('timestamp', 'desc')
+        .onSnapshot(snapshot=> setMessages (
+            snapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            }))
+        ));
+        return unsubscribe;
+    }, [route])
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white' }}>
@@ -76,7 +92,49 @@ const BoardScreen = ({ navigation, route }) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <>
                 <ScrollView>
-                    {/* CHAT */}
+                    {messages.map(({id, data})=> 
+                    data.email === auth.currentUser.email ?(
+                            <View key={id} style={styles.reciever}>
+                                <Avatar 
+                                position='absolute'
+                                rounded
+                                containerStyle={{
+                                    position: 'absolute',
+                                    bottom: -15,
+                                    right: -5,
+                                }}
+                                bottom={-15}
+                                right={-5}
+                                size={30}
+                                source={{
+                                    uri: data.photoURL,
+                                }}
+                                />
+                                <Text style= {styles.receiverText}>
+                                    {data.message}
+                                </Text>
+                            </View>
+                        ): (
+                            <View stye={styles.sender}>
+                                <Avatar 
+                               rounded
+                               position='absolute'
+                               bottom={-15}
+                               right={-5}
+                               size={30}
+                               source={{
+                                   uri: data.photoURL,
+                               }}
+                                />
+                                <Text style= {styles.senderText}>
+                                    {data.message}
+                                </Text>
+                                <Text style= {styles.senderName}>
+                                    {data.displayName}
+                                </Text>
+                            </View>
+                        )
+                    )}
                 </ScrollView>
 
                 <View style={styles.footer}>
@@ -97,12 +155,11 @@ const BoardScreen = ({ navigation, route }) => {
             </>
             </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-            {/* <Text>{route.params.boardName}</Text> */}
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default BoardScreen
+export default BoardScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -126,5 +183,45 @@ const styles = StyleSheet.create({
         padding: 10,
         color: 'grey',
         borderRadius: 30,
-    }
+    },
+
+    reciever:{
+        padding: 15,
+        backgroundColor: '#ECECEC',
+        alignSelf: 'flex-end',
+        borderRadius: 20,
+        marginRight: 15,
+        marginBottom:20,
+        maxWidth: '80%',
+        position:'relative'
+    },
+
+    sender: {
+        padding: 15,
+        backgroundColor: 'purple',
+        alignSelf: 'flex-start',
+        borderRadius: 20,
+        margin: 15,
+        maxWidth: '80%',
+        position:'relative'        
+    },
+
+    senderName:{
+        left: 10,
+        paddingRight: 10,
+        fontSize: 10,
+        color: 'white',
+    },
+
+    senderText:{
+        color:'white',
+        fontWeight: '500',
+        marginLeft: 10,
+        marginBottom: 15,
+    },
+    receiverText:{
+        color:'black',
+        fontWeight: '500',
+        marginLeft: 10,
+    },
 })
