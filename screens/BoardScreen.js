@@ -9,9 +9,9 @@ import { Platform, TouchableWithoutFeedback } from 'react-native'
 import { Keyboard } from 'react-native'
 import { db, auth } from '../firebase'
 import firebase from 'firebase'
+import moment from "moment";
 
 const BoardScreen = ({ navigation, route }) => {
-
     // type message and send //
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
@@ -57,6 +57,7 @@ const BoardScreen = ({ navigation, route }) => {
 
         db.collection('Boards').doc(route.params.id).collection('messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            dateTime : moment().format('YYYY-MM-DD HH:mm:ss'),
             message: input,
             displayName: auth.currentUser.displayName,
             email: auth.currentUser.email,
@@ -115,6 +116,12 @@ const BoardScreen = ({ navigation, route }) => {
                                 <Text style= {styles.receiverText}>
                                     {data.message}
                                 </Text>
+                                <Text style= {styles.receiverText}>
+                                    {data.displayName}
+                                </Text>
+                                <Text style= {styles.receiverText}>
+                                    {data.dateTime}
+                                </Text>
                             </View>
                         ): (
                             <View style= {styles.senders}>
@@ -138,6 +145,9 @@ const BoardScreen = ({ navigation, route }) => {
                                 </Text>
                                 <Text style= {styles.senderName}>
                                     {data.displayName}
+                                </Text>
+                                <Text style= {styles.receiverText}>
+                                    {data.dateTime}
                                 </Text>
                             </View>
                         )
