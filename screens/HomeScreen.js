@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { SafeAreaView, ScrollView } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import CustomListItem from '../components/CustomListItem';
@@ -8,6 +8,8 @@ import { TouchableOpacity } from 'react-native';
 import {AntDesign, SimpleLineIcons } from '@expo/vector-icons';
 
 const HomeScreen = ({navigation}) => {
+    const [boards, setBoards] = useState([]);
+
 
     // LOG OUT //
     const signOutUser = () => {
@@ -17,40 +19,60 @@ const HomeScreen = ({navigation}) => {
     };
     // LOG OUT //
 
+    useEffect(() => {
+        const unsubscribe = db.collection("Boards").onSnapshot((snapshot) =>
+        setBoards(
+            snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+            }))
+        ))
+            return unsubscribe;
+    }, [])
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "MessageBoard",
             headerStyle : {backgroundColor: 'purple'},
             headerTitleStyle: { color: 'black' },
             headerTintColor: 'black',
-            headerLeft: () => (<View style={{ marginLeft: 20}}>
+            headerLeft: () => (
+            <View style={{ marginLeft: 20}}>
                 <TouchableOpacity onPress={signOutUser} activeOpacity = {0.5}>
                 <Avatar rounded source = {{ uri: auth?.currentUser?.photoURL}} />
                 </TouchableOpacity>
             </View>
         ),
         headerRight: () => (
-            <View style= {{
-                flexBasis:'row',
+            <View 
+            style= {{
+                flexDirection:'row',
                 justifyContent: 'space-between',
                 width:80,
                 marginRight: 20,
             }}>
-                <TouchableOpacity activeOpacity={0.5}>
+                <TouchableOpacity 
+                activeOpacity={0.5}>
                     <AntDesign name="camerao" size={24} color='black'/>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.5}>
-                    <SimpleLineIcons name="pencil" size={24} color='black'/>
+                    <SimpleLineIcons 
+                    onPress={()=> navigation.navigate("AddChat")}
+                    name="pencil" 
+                    size={24} 
+                    color='black'/>
                 </TouchableOpacity>
             </View>
         ),
         });
     }, [navigation]);
 
+    
     return (
         <SafeAreaView>
-            <ScrollView>
-                <CustomListItem/>
+            <ScrollView style={styles.container}>
+                {boards.map(({id, data: { boardName }})=>(
+                    <CustomListItem key={id} id = {id} boardName={boardName}/>
+                ))}
             </ScrollView>
         </SafeAreaView>
     )
@@ -58,4 +80,8 @@ const HomeScreen = ({navigation}) => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container:{
+        height: '100%',
+    }
+})

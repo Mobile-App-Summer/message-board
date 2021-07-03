@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, LogBox } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
-
+import AddChatScreen from './screens/AddChatScreen';
 const Stack = createStackNavigator();
 
 const globalScreenOptions={
@@ -17,6 +17,9 @@ const globalScreenOptions={
   };
 
 export default function App() {
+  console.ignoredYellowBox = [
+    'Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window).',
+];
   return (
     <NavigationContainer>
       <Stack.Navigator 
@@ -33,6 +36,7 @@ export default function App() {
         }}name='Register' component ={RegisterScreen}/>
 
         <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="AddChat" component={AddChatScreen}/>
 
       </Stack.Navigator>
     </NavigationContainer>
