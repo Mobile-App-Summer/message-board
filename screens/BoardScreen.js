@@ -15,6 +15,9 @@ const BoardScreen = ({ navigation, route }) => {
     // type message and send //
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
+    const photoURL = auth.currentUser.photoURL;
+    const boardName = route.params.boardName;
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title:"Board",
@@ -30,8 +33,7 @@ const BoardScreen = ({ navigation, route }) => {
                     <Avatar 
                         rounded 
                         source={{
-                            uri:
-                            messages[0]?.data.photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
+                            uri: photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
                         }} 
                     />
                     <Text style={{color:'white', marginLeft: 10, fontWeight: '700'}}>
@@ -49,28 +51,28 @@ const BoardScreen = ({ navigation, route }) => {
             ),
         });
 
-    }, [navigation, messages])
+    }, [messages])
 
     // SEND MESSAGE //
     const sendMessage=() => {
         Keyboard.dismiss();
 
-        db.collection('Boards').doc(route.params.id).collection('messages').add({
+        db.collection('Boards').doc(boardName).collection('messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             dateTime : moment().format('YYYY-MM-DD HH:mm:ss'),
             message: input,
             displayName: auth.currentUser.displayName,
             email: auth.currentUser.email,
-            photoURL: auth.currentUser.photoURL,
+            photoURL: photoURL,
         })
 
         setInput('')
     };
 
     useLayoutEffect(() => {
-        const unsubscribe=db
+        const unsubscribe = db
         .collection('Boards')
-        .doc(route.params.id)
+        .doc(boardName)
         .collection('messages')
         .orderBy('timestamp')
         .onSnapshot(snapshot=> setMessages (
@@ -80,7 +82,7 @@ const BoardScreen = ({ navigation, route }) => {
             }))
         ));
         return unsubscribe;
-    }, [route])
+    }, [messages])
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white' }}>

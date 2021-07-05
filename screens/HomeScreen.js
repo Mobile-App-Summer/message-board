@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native';
 import {AntDesign, SimpleLineIcons } from '@expo/vector-icons';
 
 const HomeScreen = ({navigation}) => {
-    const [boards, setBoards] = useState([]);
+    const boards = ["Cars", "Fashion", "Food", "Games"];
 
 
     // LOG OUT //
@@ -19,16 +19,6 @@ const HomeScreen = ({navigation}) => {
     };
     // LOG OUT //
 
-    useEffect(() => {
-        const unsubscribe = db.collection("Boards").onSnapshot((snapshot) =>
-        setBoards(
-            snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data(),
-            }))
-        ))
-            return unsubscribe;
-    }, [])
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "MessageBoard",
@@ -64,20 +54,18 @@ const HomeScreen = ({navigation}) => {
     }, [navigation]);
 
     //CHAT //
-    const enterChat=(id, boardName) => {
+    const enterChat=(boardName) => {
         navigation.navigate('Board', {
-        id,
-        boardName,
+        boardName
     });
     }
 
     return (
         <SafeAreaView>
             <ScrollView style={styles.container}>
-                {boards.map(({id, data: { boardName }})=>(
+                {boards.map((boardName)=>(
                     <CustomListItem 
-                    key={id} 
-                    id = {id} 
+                    key={boardName} 
                     boardName={boardName}
                     enterChat={enterChat}/>
                 ))}
