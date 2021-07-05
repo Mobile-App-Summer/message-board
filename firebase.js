@@ -3,14 +3,13 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAB9lLrDf_wVoG8kifZUwuJldf0lNQ8OKo",
-  authDomain: "boardmessage-9ea3f.firebaseapp.com",
-  databaseURL: "https://boardmessage-9ea3f-default-rtdb.firebaseio.com",
-  projectId: "boardmessage-9ea3f",
-  storageBucket: "boardmessage-9ea3f.appspot.com",
-  messagingSenderId: "361924825891",
-  appId: "1:361924825891:web:11fe3bdc3e3371a804b296",
-  measurementId: "G-SJNBZEJKF1"
+  apiKey: "AIzaSyA5_KiW-Q1jabaFfz7-y6fusYRBHrhEaSo",
+  authDomain: "messageboard3-4273e.firebaseapp.com",
+  projectId: "messageboard3-4273e",
+  storageBucket: "messageboard3-4273e.appspot.com",
+  messagingSenderId: "249494891684",
+  appId: "1:249494891684:web:37b55a8060bcb9c86a4a31",
+  measurementId: "G-BWZLX8DCKT"
   };
 
   let app;
@@ -21,7 +20,7 @@ const firebaseConfig = {
     app = firebase.app();
   }
 
-  const db = app.firestore();
-  const auth = firebase.auth();
+const db = app.firestore();
+const auth = firebase.auth();
 
   export { db, auth };

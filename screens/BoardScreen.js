@@ -14,10 +14,10 @@ import moment from "moment";
 const BoardScreen = ({ navigation, route }) => {
     // type message and send //
     const [input, setInput] = useState("");
-    const [messages, setMessages] = useState([]);
+    const [documents, setDocuments] = useState([]);
     useLayoutEffect(() => {
         navigation.setOptions({
-            title:"Board",
+            title: route.params.boardName,
             headerBackTitleVisible: false,
             headerTitleAlign: 'left',
             headerTitle:()=> (
@@ -31,11 +31,11 @@ const BoardScreen = ({ navigation, route }) => {
                         rounded 
                         source={{
                             uri:
-                            messages[0]?.data.photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
+                            auth.currentUser?.photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
                         }} 
                     />
-                    <Text style={{color:'white', marginLeft: 10, fontWeight: '700'}}>
-                        {route.params.boardName}
+                    <Text style={{color:'white', marginLeft: 20, fontWeight: '700'}}>
+                        {route.params.boardName} Board
                     </Text>
                 </View>
             ),
@@ -49,38 +49,41 @@ const BoardScreen = ({ navigation, route }) => {
             ),
         });
 
-    }, [navigation, messages])
+    }, [navigation, route])
 
     // SEND MESSAGE //
     const sendMessage=() => {
+        if (input === '') {
+            console.log('No message')
+            return;
+        }
         Keyboard.dismiss();
 
-        db.collection('Boards').doc(route.params.id).collection('messages').add({
+        db.collection('Boards').doc(route.params.boardName).collection('Messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            dateTime : moment().format('YYYY-MM-DD HH:mm:ss'),
-            message: input,
+            content: input,
             displayName: auth.currentUser.displayName,
-            email: auth.currentUser.email,
-            photoURL: auth.currentUser.photoURL,
-        })
+            uid: auth.currentUser.uid,
+            photoUrl: auth.currentUser.photoURL
+        });
 
-        setInput('')
+        setInput('');
     };
 
-    useLayoutEffect(() => {
-        const unsubscribe=db
+   db
         .collection('Boards')
-        .doc(route.params.id)
-        .collection('messages')
+        .doc(route.params.boardName)
+        .collection('Messages')
         .orderBy('timestamp')
-        .onSnapshot(snapshot=> setMessages (
-            snapshot.docs.map(doc => ({
+        .onSnapshot(snapshot=> 
+            setDocuments (
+            snapshot.docs.map(doc=> ({
                 id: doc.id,
-                data: doc.data()
+                message: doc.data()
             }))
         ));
-        return unsubscribe;
-    }, [route])
+    
+
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white' }}>
@@ -95,9 +98,9 @@ const BoardScreen = ({ navigation, route }) => {
                 <ScrollView contentContainerStyle={{
                     paddingTop: 15
                 }}>
-                    {messages.map(({id, data})=> 
-                    data.email === auth.currentUser.email ?(
-                            <View key={id} style={styles.receiver}>
+                    {documents.map( ({id, message})=> 
+                    message.uid === auth.currentUser.uid?(
+                            <View key={id.toString()} style={styles.receiver}>
                                 <Avatar 
                                 position='absolute'
                                 rounded
@@ -110,21 +113,21 @@ const BoardScreen = ({ navigation, route }) => {
                                 right={-5}
                                 size={30}
                                 source={{
-                                    uri: data.photoURL,
+                                    uri: message?.photoUrl || 'https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg'
                                 }}
                                 />
                                 <Text style= {styles.receiverText}>
-                                    {data.message}
+                                    {message.content}
                                 </Text>
                                 <Text style= {styles.receiverText}>
-                                    {data.displayName}
+                                    {message.displayName}
                                 </Text>
                                 <Text style= {styles.receiverText}>
-                                    {data.dateTime}
+                                    {message?.timestamp?.toDate()?.toString()}
                                 </Text>
                             </View>
                         ): (
-                            <View style= {styles.senders}>
+                            <View key={id.toString()} style= {styles.senders}>
                                 <Avatar 
                                 position='absolute'
                                 containerStyle={{
@@ -137,17 +140,17 @@ const BoardScreen = ({ navigation, route }) => {
                                rounded
                                size={30}
                                source={{
-                                   uri: data.photoURL,
+                                   uri: message?.photoUrl || 'https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg'
                                }}
                                 />
                                 <Text style= {styles.senderText}>
-                                    {data.message}
+                                    {message.content}
                                 </Text>
                                 <Text style= {styles.senderName}>
-                                    {data.displayName}
+                                    {message.displayName}
                                 </Text>
                                 <Text style= {styles.receiverText}>
-                                    {data.dateTime}
+                                    {message?.timestamp?.toDate()?.toString()}
                                 </Text>
                             </View>
                         )

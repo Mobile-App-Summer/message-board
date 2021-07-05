@@ -2,7 +2,7 @@ import React, {useState, useLayoutEffect, useEffect} from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Input, Text } from 'react-native-elements';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const RegisterScreen = ({ navigation }) => {
     const [firstName, setFirstName] = useState("");
@@ -17,14 +17,28 @@ const RegisterScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    const register =() => {
+    const register = () => {
+        if(!email || !password || !firstName || !lastName) {
+            alert("Please enter your")
+            return
+        }
         auth.createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
             authUser.user.updateProfile({
-                displayName: firstName && lastName,
+                displayName: `${firstName} ${lastName}`,
                 photoURL: imagesURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
 
             })
+            db.collection('Users').doc(authUser.user.uid).set({
+                uid: authUser.user.uid,
+                firstName: firstName,
+                lastName: lastName,
+                role: "customer",
+                registrationDateTime: firebase.firestore.FieldValue.serverTimestamp(),
+                photoURL: imagesURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
+            })
+            .then(() => console.log("Profile info saved"))
+            .catch((error) => console.log("Profile info not saved: " + error))
         }).catch(error => alert(error.message));
     }
     return (
