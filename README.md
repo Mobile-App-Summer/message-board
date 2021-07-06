@@ -18,7 +18,6 @@ $ cd ./message-board
 $ yarn install or npm install
 $ expo start
 and press a to android i to ios w to web
-
 ```
 
 ## Teammates
