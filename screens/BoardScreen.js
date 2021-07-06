@@ -36,7 +36,7 @@ const BoardScreen = ({ navigation, route }) => {
                             uri: photoURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
                         }} 
                     />
-                    <Text style={{color:'white', marginLeft: 10, fontWeight: '700'}}>
+                    <Text style={{color:'purple', marginLeft: 10, fontWeight: '700'}}>
                         {route.params.boardName}
                     </Text>
                 </View>
@@ -46,7 +46,7 @@ const BoardScreen = ({ navigation, route }) => {
                 style={{ marginLeft: 10 }}
                 onPress={navigation.goBack}
                 >
-                    <AntDesign name="arrowleft" size={24} color="white"/>
+                    <AntDesign name="arrowleft" size={24} color="purple" />
                 </TouchableOpacity>
             ),
         });

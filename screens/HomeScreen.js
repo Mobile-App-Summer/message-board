@@ -19,33 +19,33 @@ const HomeScreen = ({navigation}) => {
     };
     // LOG OUT //
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            // title: "MessageBoard",
-            headerStyle : {backgroundColor: 'purple'},
-            headerTitleStyle: { color: 'black' },
-            headerTintColor: 'black',
-        headerRight: () => (
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         // title: "MessageBoard",
+    //         headerStyle : {backgroundColor: 'white'},
+    //         headerTitleStyle: { color: 'black' },
+    //         headerTintColor: 'black',
+    //     headerRight: () => (
             
-            <View 
-            style= {{
-                flexDirection:'row',
-                justifyContent: 'space-between',
-                width:80,
-                marginRight: 20,
-            }}>
-                <TouchableOpacity activeOpacity={0.5}>
-                    <SimpleLineIcons 
-                    onPress={()=> navigation.navigate("AddChat")}
-                    name="pencil" 
-                    size={24} 
-                    color='black'/>
-                </TouchableOpacity>
+    //         <View 
+    //         style= {{
+    //             flexDirection:'row',
+    //             justifyContent: 'space-between',
+    //             width:80,
+    //             marginRight: 20,
+    //         }}>
+    //             <TouchableOpacity activeOpacity={0.5}>
+    //                 <SimpleLineIcons 
+    //                 onPress={()=> navigation.navigate("AddChat")}
+    //                 name="pencil" 
+    //                 size={24} 
+    //                 color='black'/>
+    //             </TouchableOpacity>
 
-            </View>
-        ),
-        });
-    }, [navigation]);
+    //         </View>
+    //     ),
+    //     });
+    // }, [navigation]);
 
     //CHAT //
     const enterChat=(boardName) => {
@@ -57,7 +57,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView>
             <ScrollView style={styles.container}>
-            <Button style = {styles.button} title="Open drawer" onPress={() => navigation.openDrawer()} />
+            {/* <Button style = {styles.button} title="Open drawer" onPress={() => navigation.openDrawer()} /> */}
                 {boards.map((boardName)=>(
                     <CustomListItem 
                     key={boardName} 

@@ -35,8 +35,13 @@ export default function App() {
 // SPLASH SCREEN //
 function DrawerRoutes(){
   return(
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="MessageBoard" component={HomeScreen}/>
+    <Drawer.Navigator
+    screenOptions={{
+      headerShown: true,
+      justifyContent: 'center',
+    }}
+    >
+      <Drawer.Screen name="Home" component={HomeScreen}/>
       <Drawer.Screen name="Profile" component={ProfileScreen}/>
       <Drawer.Screen name="Settings" component={SettingScreen}/>
     </Drawer.Navigator>
@@ -47,8 +52,12 @@ function DrawerRoutes(){
     <NavigationContainer>
       <Stack.Navigator 
       // initialRouteName="Home" 
-      screenOptions={globalScreenOptions}
       >
+        <Stack.Screen name="Message Board App" component={DrawerRoutes}       
+        screenOptions={{
+        headerShown: true,
+
+      }}/>
 
         <Stack.Screen options={{
         title: "LOGIN"
@@ -56,10 +65,7 @@ function DrawerRoutes(){
         
         <Stack.Screen options={{
         title: "Register"
-        }}name='Register' component ={RegisterScreen}/>
-
-        <Stack.Screen name="Home" component={DrawerRoutes} />
-        
+        }}name='Register' component ={RegisterScreen}/>        
         <Stack.Screen name="AddChat" component={AddChatScreen}/>
         <Stack.Screen name="Board" component={BoardScreen}/>
 
