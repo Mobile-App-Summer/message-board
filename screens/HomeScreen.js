@@ -21,18 +21,12 @@ const HomeScreen = ({navigation}) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "MessageBoard",
+            // title: "MessageBoard",
             headerStyle : {backgroundColor: 'purple'},
             headerTitleStyle: { color: 'black' },
             headerTintColor: 'black',
-            headerLeft: () => (
-            <View style={{ marginLeft: 20}}>
-                <TouchableOpacity onPress={signOutUser} activeOpacity = {0.5}>
-                <Avatar rounded source = {{ uri: auth?.currentUser?.photoURL}} />
-                </TouchableOpacity>
-            </View>
-        ),
         headerRight: () => (
+            
             <View 
             style= {{
                 flexDirection:'row',
@@ -40,7 +34,6 @@ const HomeScreen = ({navigation}) => {
                 width:80,
                 marginRight: 20,
             }}>
-
                 <TouchableOpacity activeOpacity={0.5}>
                     <SimpleLineIcons 
                     onPress={()=> navigation.navigate("AddChat")}
@@ -48,6 +41,7 @@ const HomeScreen = ({navigation}) => {
                     size={24} 
                     color='black'/>
                 </TouchableOpacity>
+
             </View>
         ),
         });
@@ -63,6 +57,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView>
             <ScrollView style={styles.container}>
+            <Button style = {styles.button} title="Open drawer" onPress={() => navigation.openDrawer()} />
                 {boards.map((boardName)=>(
                     <CustomListItem 
                     key={boardName} 
@@ -87,5 +82,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     container:{
         height: '100%',
+    },
+    button:{
+
     }
 })
