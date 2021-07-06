@@ -24,6 +24,10 @@ and press a to android i to ios w to web
 ```
 
 ## Teammates
-
+Jiyoung Yoon
+Kareem Bishi
+Maduri Ramadoss
 
 ## Youtube Link
+IOS - https://youtu.be/b6GtNcvanaA
+ANDROID & WEB - https://youtu.be/NqopfJWCWPA
