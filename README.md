@@ -29,5 +29,5 @@ and press a to android i to ios w to web
 * Maduri Ramadoss
 
 ## Youtube Link
-IOS - https://youtu.be/b6GtNcvanaA
-ANDROID & WEB - https://youtu.be/NqopfJWCWPA
+* IOS - https://youtu.be/b6GtNcvanaA
+* ANDROID & WEB - https://youtu.be/NqopfJWCWPA
