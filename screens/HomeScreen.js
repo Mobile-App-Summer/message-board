@@ -64,12 +64,7 @@ const HomeScreen = ({navigation}) => {
                     boardName={boardName}
                     enterChat={enterChat}/>
                 ))}
-
-            <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => navigation.navigate('Profile')}>
-                <Text style={styles.textStyle}>Profile</Text>
-              </Pressable>
+                
               <Button style = {styles.button} title="Open drawer" onPress={() => navigation.openDrawer()} />
 
             </ScrollView>

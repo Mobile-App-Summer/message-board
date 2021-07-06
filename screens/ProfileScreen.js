@@ -57,6 +57,7 @@ return (
         </View>
 
         <Button containerStyle = {styles.button} onPress={update} title="Update Profile"/>
+
         <View style = {{ height: 100}}/>
     </KeyboardAvoidingView>
 );

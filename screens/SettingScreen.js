@@ -1,41 +1,95 @@
-<<<<<<< HEAD
-import React from 'react';
-import { View,Text,StyleSheet } from "react-native";
+import React, { useState, useLayoutEffect } from 'react'
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Avatar,SimpleLineIcons } from 'react-native'
+import { Button, Input, Image } from 'react-native-elements';
+import { StatusBar } from 'expo-status-bar';
+import { auth } from '../firebase';
 
-function SettingScreen(){
-    return(
-        <View>
-            <Text>Profile</Text>
-        </View>
-=======
-import React, { useLayoutEffect, useState, useEffect } from 'react'
-import { View,Text,StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar } from 'react-native-elements';
-import { auth, db } from '../firebase';
-
-// LOG OUT
-// PROFILE
-// ATTACH SOCIAL MEDIA PROFILES
 const SettingScreen = ({navigation}) => {
-        // LOG OUT //
-        const signOutUser = () => {
-            auth.signOut().then(() => {
-                navigation.replace('Login');
-            });
-        };
-        // LOG OUT //
-    return(
-        <View>
-                <TouchableOpacity onPress={signOutUser} activeOpacity = {0.5}>
-                <Avatar rounded source = {{ uri: auth?.currentUser?.photoURL}} />
-                </TouchableOpacity>        
-                </View>
->>>>>>> 2c51d432486943446b28d1a6de67f532229d75cb
-    )
-}
 
-const styles = StyleSheet.create({
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const update = () => {
+        if (email === '' && password === '') {
+            alert('Nothing to update!')
+            return;
+        }
 
-})
+        if (email !== '') {
+            auth.currentUser.updateEmail(email)
+            .then(() => alert('Email Updated Successfully'))
+            .catch(error => alert(error.message));
+        }
+
+        if (password !== '') {
+            auth.currentUser.updatePassword(password)
+            .then(() => alert('Password Updated Successfully'))
+            .catch(error => alert(error.message));
+        }
+    }
+    
+    const signOutUser = () => {
+        auth.signOut().then(() => {
+            navigation.replace('Login');
+        });
+    };
+    
+    return (
+        <KeyboardAvoidingView behavior='padding' style ={styles.container}>
+            <StatusBar style ="light" />
+    
+            <View style ={styles.inputContainer}>
+                <Text style ={styles.instruction}>Enter Required Changes</Text>
+                <Input 
+                placeholder="Enter New Email" 
+                autoFocus 
+                type = 'text'
+                value={email}
+                onChangeText={(text) => setEmail(text)}  
+                />
+                <Input 
+                placeholder='Enter New Password'
+                secureTextEntry 
+                type ='text'
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+                onSubmitEditing={update}
+                />
+            </View>
+    
+            <Button containerStyle = {styles.button} onPress={update} title="Update Settings"/>
+            <Button containerStyle = {styles.button} onPress={() => signOutUser()} title="Log Out"/>
+            <View style = {{ height: 100}}/>
+        </KeyboardAvoidingView>
+    );
+    }
 
 export default SettingScreen
+
+const styles = StyleSheet.create({
+    inputContainer:{
+        width: 300,
+        marginTop: 10,
+
+    },
+
+    container:{
+        flex: 1,
+        alignItems : 'center',
+        justifyContent: 'center',
+        padding: 10,
+        backgroundColor: 'white',
+    },
+
+    button: {
+        width: 200,
+        marginTop: 10,
+    },
+    instruction:{
+        fontWeight: '600',
+        fontSize: 22,
+        marginLeft: 10,
+        marginBottom: 10,
+        color: '#303030'
+    },
+})
