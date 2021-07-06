@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { Button, Input, Image } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 import { auth } from '../firebase';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -56,6 +57,11 @@ const LoginScreen = ({ navigation }) => {
 
             <Button containerStyle = {styles.button} onPress={signIn} title="Login"/>
             <Button containerStyle = {styles.button} onPress={() => navigation.navigate('Register')} type="outline" title="Register"/>
+            <FontAwesome5.Button style={styles.googleButton} name="google" onPress={() => this.googleLogIn()}
+        //any other customization you want, like borderRadius, color, or size
+            >
+            <Text style={styles.googleText}>Log In With Google</Text>
+            </FontAwesome5.Button>
             <View style = {{ height: 100}}/>
         </KeyboardAvoidingView>
     );
