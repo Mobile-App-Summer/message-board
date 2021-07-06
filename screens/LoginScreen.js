@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
-import { Button, Input, Image } from 'react-native-elements';
+import { Button, Input, Image, Divider } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 import { auth } from '../firebase';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -57,10 +57,11 @@ const LoginScreen = ({ navigation }) => {
 
             <Button containerStyle = {styles.button} onPress={signIn} title="Login"/>
             <Button containerStyle = {styles.button} onPress={() => navigation.navigate('Register')} type="outline" title="Register"/>
-
+            <View style={styles.spacer}>
             <FontAwesome5.Button style={styles.googleButton} name="google" onPress={() => this.googleLogIn()}>
                  <Text style={styles.googleText}>Log In With Google</Text>
             </FontAwesome5.Button>
+            </View>
             <View style = {{ height: 100}}/>
         </KeyboardAvoidingView>
     );
@@ -87,9 +88,8 @@ const styles = StyleSheet.create({
 
     button: {
         width: 200,
-        marginTop: 10,
     },
     spacer: {
-        marginBottom: 20,
+        marginTop: 20,
     },
 })
