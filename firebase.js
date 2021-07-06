@@ -3,13 +3,13 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBucMFDH9Jzun9JNq2FiOcBlaFzr4y5mMw",
-  authDomain: "messageboard5.firebaseapp.com",
-  projectId: "messageboard5",
-  storageBucket: "messageboard5.appspot.com",
-  messagingSenderId: "720405256874",
-  appId: "1:720405256874:web:5875b72df3614534dc4ed3",
-  measurementId: "G-EMHJEGJ4KT"
+  apiKey: "AIzaSyDm0YWyU0NaEupT5UjGnBMcbhfWgEQRxEQ",
+  authDomain: "mba1-80ec8.firebaseapp.com",
+  projectId: "mba1-80ec8",
+  storageBucket: "mba1-80ec8.appspot.com",
+  messagingSenderId: "782925214060",
+  appId: "1:782925214060:web:3b431959df84741c218349",
+  measurementId: "G-793NRF35K5"
   };
 
   let app;
@@ -20,7 +20,8 @@ const firebaseConfig = {
     app = firebase.app();
   }
 
-  const db = app.firestore();
   const auth = firebase.auth();
+  const db = app.firestore();
+
 
   export { db, auth };

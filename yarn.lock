@@ -1157,10 +1157,10 @@
     xcode "^3.0.1"
     xml2js "^0.4.23"
 
-"@expo/config-plugins@3.0.2", "@expo/config-plugins@^3.0.0":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-3.0.2.tgz#3c9fb54164b48330494cd0172d21121686bddbc4"
-  integrity sha512-bS7t9JbPBK1lCcMo2mp7QSDq2a4xsc8E6sEYVwD+YS5RKx7nxEtSYohnFWlKthm624dHCaVzqEbKxhIGO3M3Uw==
+"@expo/config-plugins@3.0.3", "@expo/config-plugins@^3.0.0":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-3.0.3.tgz#4aff484fd2adedbd12a1cd73daabf07b1a5af0e5"
+  integrity sha512-+DWHd/2L3O+njVercxGSzcBUXMm5CSzdvIK+7dU+FRhoiF57y2NzBhfNQcReYx/EY1coBrYOsMtENPhV1tWoWQ==
   dependencies:
     "@expo/config-types" "^41.0.0"
     "@expo/json-file" "8.2.30"
@@ -1180,16 +1180,16 @@
   resolved "https://registry.yarnpkg.com/@expo/config-types/-/config-types-41.0.0.tgz#ffe1444c6c26e0e3a8f7149b4afe486e357536d1"
   integrity sha512-Ax0pHuY5OQaSrzplOkT9DdpdmNzaVDnq9VySb4Ujq7UJ4U4jriLy8u93W98zunOXpcu0iiKubPsqD6lCiq0pig==
 
-"@expo/config@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@expo/config/-/config-5.0.2.tgz#0674bf2a54e14b2e9078dcbd174b3caf0dd0254f"
-  integrity sha512-NJd2iQDIWNn6vVv4NEeUMrRPFtV27loaR9w1I0d+lhbfrfIqY7JxI7OgDS8udwjBi0iWnO+BUb0l4C5SmfHuhA==
+"@expo/config@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@expo/config/-/config-5.0.3.tgz#4b37cb2690b2dc6e86931369800fc7dddc1053e7"
+  integrity sha512-FMv2Jk/v3QZXaNN/mGKqj3wLvsbAa1RjtSTNhJ7QxMiSLl6vlmfMutmKyBiuzk2KDCbELR65JkDf15m4sAZCGg==
   dependencies:
     "@babel/core" "7.9.0"
     "@babel/plugin-proposal-class-properties" "~7.12.13"
     "@babel/preset-env" "~7.12.13"
     "@babel/preset-typescript" "~7.12.13"
-    "@expo/config-plugins" "3.0.2"
+    "@expo/config-plugins" "3.0.3"
     "@expo/config-types" "^41.0.0"
     "@expo/json-file" "8.2.30"
     fs-extra "9.0.0"
@@ -1262,11 +1262,11 @@
     write-file-atomic "^2.3.0"
 
 "@expo/metro-config@^0.1.70":
-  version "0.1.77"
-  resolved "https://registry.yarnpkg.com/@expo/metro-config/-/metro-config-0.1.77.tgz#efeffb1c40c9249c04385e2c68812e9c6a68a39c"
-  integrity sha512-PGxcxkN1AJjzn82Fb3zBxbG0kI6V6BrYVhICPL3jenreKQYaHN0+/owkAwX+8MxKqaJqJR6outw8I+Gypp4ZcQ==
+  version "0.1.78"
+  resolved "https://registry.yarnpkg.com/@expo/metro-config/-/metro-config-0.1.78.tgz#f310b66dca6369799f844b88cdff06b9e467e7a1"
+  integrity sha512-DupLWdi1YaZoqMlF/jGca8COeaIMfs4LWHwAfgLKhMfZN7VXXg97njvmx/wg5S70n8vRu2XQmbNryKuD97jEFA==
   dependencies:
-    "@expo/config" "5.0.2"
+    "@expo/config" "5.0.3"
     chalk "^4.1.0"
     getenv "^1.0.0"
     metro-react-native-babel-transformer "^0.59.0"
@@ -1281,12 +1281,12 @@
     xmldom "~0.5.0"
 
 "@expo/prebuild-config@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@expo/prebuild-config/-/prebuild-config-2.0.2.tgz#25044826f3d50c018d93c6a7d7bfc5c707dc1b5f"
-  integrity sha512-wyAPiu1tnUghDoE5cUbjD92rF/rtyNqrfdwmcn56q8EG7MKuO47CxFrkhAL0EBVplPhSdzZ3zPFOtWzYK7E+6Q==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@expo/prebuild-config/-/prebuild-config-2.0.3.tgz#4b7c274af8fe530558989e0ba5f2cd1f60f8eae3"
+  integrity sha512-ruZHhdEB0nv7mHwssUFXeYeGQ8Atfeben0CdO461cmjQ/CwxmlusrkFdGfMucj5CocR9WujBr/nIMvfm4FIDIA==
   dependencies:
-    "@expo/config" "5.0.2"
-    "@expo/config-plugins" "3.0.2"
+    "@expo/config" "5.0.3"
+    "@expo/config-plugins" "3.0.3"
     "@expo/config-types" "^41.0.0"
     "@expo/image-utils" "~0.3.14"
     "@expo/json-file" "^8.2.30"
@@ -3274,9 +3274,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.723:
-  version "1.3.766"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.766.tgz#2fd14a4e54f77665872f4e23fcf4968e83638220"
-  integrity sha512-u2quJ862q9reRKh/je3GXis3w38+RoXH1J9N3XjtsS6NzmUAosNsyZgUVFZPN/ZlJ3v6T0rTyZR3q/J5c6Sy5w==
+  version "1.3.767"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.767.tgz#62cb8de251d09eea740adcbcc4edca230da81a05"
+  integrity sha512-KYFEZ581N+ovKHR6PJawl+ei5tm0ikX9lKQ+tJnbJhamqve/iowMUiF9073g6A2AVAxqpXp9/gELRQYIdg4pzg==
 
 emoji-regex@^7.0.1:
   version "7.0.3"

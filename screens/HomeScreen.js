@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react'
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, Pressable, Button } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import CustomListItem from '../components/CustomListItem';
 import { Avatar } from 'react-native-elements';
@@ -69,6 +69,14 @@ const HomeScreen = ({navigation}) => {
                     boardName={boardName}
                     enterChat={enterChat}/>
                 ))}
+
+            <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => navigation.navigate('Profile')}>
+                <Text style={styles.textStyle}>Profile</Text>
+              </Pressable>
+              <Button style = {styles.button} title="Open drawer" onPress={() => navigation.openDrawer()} />
+
             </ScrollView>
         </SafeAreaView>
     )

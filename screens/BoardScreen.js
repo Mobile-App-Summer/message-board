@@ -118,10 +118,10 @@ const BoardScreen = ({ navigation, route }) => {
                                 <Text style= {styles.receiverText}>
                                     {data.message}
                                 </Text>
-                                <Text style= {styles.receiverText}>
+                                <Text style= {styles.receiverName}>
                                     {data.displayName}
                                 </Text>
-                                <Text style= {styles.receiverText}>
+                                <Text style= {styles.receiverTime}>
                                     {data.dateTime}
                                 </Text>
                             </View>
@@ -148,7 +148,7 @@ const BoardScreen = ({ navigation, route }) => {
                                 <Text style= {styles.senderName}>
                                     {data.displayName}
                                 </Text>
-                                <Text style= {styles.receiverText}>
+                                <Text style= {styles.senderTime}>
                                     {data.dateTime}
                                 </Text>
                             </View>
@@ -227,20 +227,39 @@ const styles = StyleSheet.create({
 
     senderName:{
         left: 10,
-        paddingRight: 10,
-        fontSize: 10,
-        color: 'white',
+        fontSize: 12,
+        fontWeight: '700',
+        color: '#f0f000',
+    },
+    receiverName:{
+        left: 10,
+        fontSize: 12,
+        fontWeight: '700',
+        color: 'purple'
     },
 
     senderText:{
         color:'white',
         fontWeight: '500',
         marginLeft: 10,
-        marginBottom: 15,
+        marginBottom: 10,
     },
     receiverText:{
         color:'black',
         fontWeight: '500',
         marginLeft: 10,
+        marginBottom: 10,
+    },
+    senderTime:{
+        fontWeight: '600',
+        fontSize: 11,
+        marginLeft: 10,
+        color: '#ccc'
+    },
+    receiverTime:{
+        fontWeight: '600',
+        fontSize: 11,
+        marginLeft: 10,
+        color: '#303030'
     },
 })

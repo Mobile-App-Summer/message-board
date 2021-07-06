@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Input, Text } from 'react-native-elements';
@@ -21,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
         auth.createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
             authUser.user.updateProfile({
-                displayName: firstName && lastName,
+                displayName: `${firstName} ${lastName}`,
                 photoURL: imagesURL || "https://www.valuemomentum.com/wp-content/uploads/2021/04/anonymous-icon.jpeg",
 
             })
