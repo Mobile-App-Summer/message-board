@@ -38,7 +38,6 @@ function DrawerRoutes(){
     <Drawer.Navigator
     screenOptions={{
       headerShown: true,
-      justifyContent: 'center',
     }}
     >
       <Drawer.Screen name="Home" component={HomeScreen}/>
@@ -53,7 +52,7 @@ function DrawerRoutes(){
       <Stack.Navigator 
       // initialRouteName="Home" 
       >
-        <Stack.Screen name="Message Board App" component={DrawerRoutes}       
+        <Stack.Screen name="Message-Board-App" component={DrawerRoutes}       
         screenOptions={{
         headerShown: true,
 
