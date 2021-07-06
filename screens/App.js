@@ -7,6 +7,7 @@ import { StyleSheet, Text, View, LogBox } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import RegisterScreen from './screens/RegisterScreen';
@@ -15,7 +16,6 @@ import AddChatScreen from './screens/AddChatScreen';
 import BoardScreen from './screens/BoardScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SettingScreen from './screens/SettingScreen';
-
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -23,9 +23,11 @@ const globalScreenOptions={
   headerStyle: {backgroundColor: '#2c6BED'},
     headerTitleStyle: { color : "white"},
     headerTintColor: 'white', 
-    // headerShown: false
-
+    headerShown: false
   };
+
+
+
 
 export default function App() {
 //   console.ignoredYellowBox = [
@@ -33,6 +35,9 @@ export default function App() {
 // ];
 
 // SPLASH SCREEN //
+
+// New Code 
+// This is the drawer
 function DrawerRoutes(){
   return(
     <Drawer.Navigator initialRouteName="Home">
@@ -57,9 +62,9 @@ function DrawerRoutes(){
         <Stack.Screen options={{
         title: "Register"
         }}name='Register' component ={RegisterScreen}/>
-
-        <Stack.Screen name="Home" component={DrawerRoutes} />
-        
+        {/* New Code */}
+        {/* After login navigator goes to Drawer Routes */}
+        <Stack.Screen name="Home" component={DrawerRoutes}/>
         <Stack.Screen name="AddChat" component={AddChatScreen}/>
         <Stack.Screen name="Board" component={BoardScreen}/>
 
@@ -67,6 +72,8 @@ function DrawerRoutes(){
     </NavigationContainer>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
